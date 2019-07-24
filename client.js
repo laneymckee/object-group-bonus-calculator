@@ -39,7 +39,7 @@ const employees = [{
 // This is not a race. Everyone on your team should understand what is happening.
 // Ask questions when you don't.
 
-//PREPLANNING NOTES
+//PREPLANNING NOTES w/ MAX
 
 //create a function that takes in employee as an argument
 //for loop to bring in all the employee objects
@@ -53,21 +53,22 @@ const employees = [{
 //totalCompensation = annualSalary + new bonus variable
 //totalBonus = display new bonus variable
 
-// first objects: name   employeeNumber    annualSalary      reviewRating
-// second objects: name   bonusPercentage   totalCompensation   totalBonus
+console.log(employees);
 
-// bonusPercentage = bonusCalc();
-// totalCompensation = annualSalary + totalBonus;
-// totalBonus = (bonusCalc()/100) * annualSalary
-
+// determine name value
+// determine bonus percentage
+// determine total bonus
+// determine total compensation
+// package everything up into an object and return it
 
 for (i = 0; i < employees.length; i++) {
   console.log(determineBonus(employees[i]));
-} //from Max's code
+}
 
-function bonusCalc(emp) {
+function determineBonus(emp) {
   let bonusPercentage = 0;
 
+  //start conditionals for bonus
   if (emp.reviewRating === 3) {
     bonusPercentage += 4;
   } else if (emp.reviewRating === 4) {
@@ -81,7 +82,7 @@ function bonusCalc(emp) {
   }
 
   if (emp.annualSalary > 65000) {
-    bonusPercentage -= 5;
+    bonusPercentage -= -1;
   }
 
   if (bonusPercentage > 13) {
@@ -90,15 +91,31 @@ function bonusCalc(emp) {
 
   if (bonusPercentage < 0) {
     bonusPercentage = 0;
+  } //end conditionals for bonus
+
+
+  //changing variables for use as percentage
+  let displayPercentage = bonusPercentage + '%';
+  bonusPercentage = bonusPercentage / 100;
+
+  let newBonus = emp.annualSalary * bonusPercentage;
+
+  let newCompensation = Number(emp.annualSalary) + newBonus;
+
+  //defining new employee object & values
+  let newEmployeeInfo = {
+    name: emp.name,
+    bonusPercentage: displayPercentage,
+    totalBonus: newBonus,
+    totalCompensation: newCompensation
   }
+
+  return newEmployeeInfo;
 
 }
 
 
-//
-//
-//
-//  BELOW ARE THE REMNANTS OF FIRST ATTEMPT
+//  BELOW ARE THE REMNANTS OF OUR FIRST ATTEMPT
 
 // function NewBonus(name, bonusPercentage, totalCompensation, totalBonus) {
 //   this.name = name;
@@ -106,7 +123,6 @@ function bonusCalc(emp) {
 //   this.totalCompensation = totalCompensation;
 //   this.totalBonus = totalBonus
 // }
-
 
 // function tenureBonus( emp ) {
 //   let tenureBonusPercent = 0;
@@ -126,8 +142,7 @@ function bonusCalc(emp) {
 // bonusPercentage = bonusCalc();
 // totalCompensation = annualSalary + totalBonus;
 // // totalBonus = (bonusCalc()/100) * annualSalary
-
-
+//
 
 // function bonusCalc( emp ) {
 //   let bonusPercentage = 0;
@@ -180,7 +195,5 @@ function bonusCalc(emp) {
 
 //   // new NewBonus(name, bonusPercentage, totalCompensation, totalBonus);
 // }
-
-
 
 // bonusCalc(employees);
